@@ -1,5 +1,9 @@
-package com.bfi.marketing.models;
+package com.bfi.marketing.payload.request;
 
+import com.bfi.marketing.models.EPlateform;
+import com.bfi.marketing.models.EType;
+import com.bfi.marketing.models.Evenement;
+import com.bfi.marketing.models.Fete;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,47 +14,17 @@ import javax.validation.constraints.NotBlank;
 import java.util.Date;
 import java.util.Set;
 
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(	name = "publication")
-public class publication {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class PublicationRequest {
 
-
-    @JsonFormat(pattern="yyyy-MM-dd")
     private Date date;
-
-
-    @Enumerated(EnumType.STRING)
-    @Column(length = 20)
     private EPlateform plateform;// peut etre 3 booleans (instagram, fb, twitter)
-
-    @ManyToOne(cascade = CascadeType.ALL)
     private Evenement idEvent;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idFete", referencedColumnName = "id")
     private Fete idFete;
 
-
-    public publication(Date date, EPlateform plateform, Evenement idEvent, Fete idFete) {
-        this.date = date;
-        this.plateform = plateform;
-        this.idEvent = idEvent;
-        this.idFete = idFete;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public Date getDate() {
         return date;
@@ -82,8 +56,5 @@ public class publication {
 
     public void setIdFete(Fete idFete) {
         this.idFete = idFete;
-    }
-
-    public publication() {
     }
 }
