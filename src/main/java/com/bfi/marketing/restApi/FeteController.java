@@ -2,14 +2,10 @@ package com.bfi.marketing.restApi;
 
 
 import com.bfi.marketing.exceptions.NotFoundException;
-import com.bfi.marketing.models.Evenement;
+
 import com.bfi.marketing.models.Fete;
-import com.bfi.marketing.models.publication;
-import com.bfi.marketing.payload.request.EvenementRequest;
 import com.bfi.marketing.payload.request.FeteRequest;
-import com.bfi.marketing.payload.request.PublicationRequest;
 import com.bfi.marketing.payload.response.MessageResponse;
-import com.bfi.marketing.repository.EvenementRepository;
 import com.bfi.marketing.repository.FeteRepository;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -18,7 +14,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
 import javax.validation.Valid;
+
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -27,11 +27,15 @@ import java.util.Optional;
 public class FeteController {
 
 
+
     @Autowired
     FeteRepository feteRepository;
     @PostMapping("/addfete")
     public ResponseEntity<?> addFete(@Valid @RequestBody FeteRequest feteRequest) {
-        Fete f = new Fete(feteRequest.getTitre(),feteRequest.getDate(),feteRequest.getDescription(),feteRequest.getType());
+        Fete f = new Fete(feteRequest.getTitre(),
+                          feteRequest.getDate(),
+                          feteRequest.getDescription(),
+                          feteRequest.getType());
         feteRepository.save(f);
         return ResponseEntity.ok(new MessageResponse("fete registered successfully!"));
     }
@@ -66,5 +70,41 @@ public class FeteController {
             throw new NotFoundException("fete not found");
         }
     }
+
+
+
+    @ApiOperation(value = "Get all parties", response = ResponseEntity.class)
+    @GetMapping("/listf")
+    public Iterable<Fete> getAllFete() {
+        return feteRepository.findAll();
+    }
+
+
+
+    @GetMapping("/{id}")
+    public Optional<Fete> findById(@PathVariable (value = "id") Long id) {
+
+        return feteRepository.findById(id);
+    }
+
+    @GetMapping("findTitre/{titre}")
+    public List<Fete> findByTitre(@PathVariable (value = "titre") String titre) {
+
+        return feteRepository.findByTitre(titre);
+
+    }
+
+    @GetMapping("findDate/{date}")
+    public List<Fete> findByDate(@PathVariable (value = "date") String date) {
+
+        return feteRepository.findByDate(date);
+
+    }
+
+
+
+
+
+
 
 }

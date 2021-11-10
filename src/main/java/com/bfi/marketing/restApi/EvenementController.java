@@ -3,6 +3,7 @@ package com.bfi.marketing.restApi;
 
 import com.bfi.marketing.exceptions.NotFoundException;
 import com.bfi.marketing.models.Evenement;
+import com.bfi.marketing.models.Fete;
 import com.bfi.marketing.payload.request.EvenementRequest;
 import com.bfi.marketing.payload.response.MessageResponse;
 import com.bfi.marketing.repository.EvenementRepository;
@@ -14,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:4200")
@@ -61,5 +63,35 @@ public class EvenementController {
             throw new NotFoundException("event not found");
         }
     }
+
+
+    @ApiOperation(value = "Get all events", response = ResponseEntity.class)
+    @GetMapping("/listEvent")
+    public Iterable<Evenement> getAllEvent() {
+        return eventRepository.findAll();
+    }
+
+
+
+    @GetMapping("/{id}")
+    public Optional<Evenement> findById(@PathVariable (value = "id") Long id) {
+
+        return eventRepository.findById(id);
+    }
+
+    @GetMapping("findTitre/{titre}")
+    public List<Evenement> findByTitre(@PathVariable (value = "titre") String titre) {
+
+        return eventRepository.findByTitre(titre);
+
+    }
+
+    @GetMapping("findDate/{date}")
+    public List<Evenement> findByDate(@PathVariable (value = "date") String date) {
+
+        return eventRepository.findByDate(date);
+
+    }
+
 
 }

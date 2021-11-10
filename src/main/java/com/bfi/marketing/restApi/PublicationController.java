@@ -2,13 +2,9 @@ package com.bfi.marketing.restApi;
 
 import com.bfi.marketing.exceptions.NotFoundException;
 import com.bfi.marketing.models.Evenement;
-import com.bfi.marketing.models.Fete;
 import com.bfi.marketing.models.publication;
-import com.bfi.marketing.payload.request.EvenementRequest;
-import com.bfi.marketing.payload.request.FeteRequest;
 import com.bfi.marketing.payload.request.PublicationRequest;
 import com.bfi.marketing.payload.response.MessageResponse;
-import com.bfi.marketing.repository.FeteRepository;
 import com.bfi.marketing.repository.PublicationRepository;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -64,6 +60,12 @@ public class PublicationController {
         } else {
             throw new NotFoundException("Post not found");
         }
+    }
+
+    @GetMapping("/{id}")
+    public Optional<publication> findById(@PathVariable (value = "id") Long id) {
+
+        return pubRepository.findById(id);
     }
 
 

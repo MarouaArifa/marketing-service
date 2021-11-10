@@ -84,6 +84,5 @@ public class publication {
         this.idFete = idFete;
     }
 
-    public publication() {
-    }
+
 }

@@ -11,7 +11,6 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 @Entity
 @Table(	name = "fetes")
@@ -47,6 +46,14 @@ public class Fete {
 
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Date getDate() {
         return date;
     }
@@ -77,5 +84,9 @@ public class Fete {
 
     public void setType(EType type) {
         this.type = type;
+    }
+
+
+    public Fete() {
     }
 }
