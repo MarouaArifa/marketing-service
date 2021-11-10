@@ -87,19 +87,14 @@ public class FeteController {
         return feteRepository.findById(id);
     }
 
-    @GetMapping("findTitre/{titre}")
-    public List<Fete> findByTitre(@PathVariable (value = "titre") String titre) {
+    @GetMapping("findMulti/{key}")
+    public List<Fete> findMulti(@PathVariable (value = "key") String key) {
 
-        return feteRepository.findByTitre(titre);
-
-    }
-
-    @GetMapping("findDate/{date}")
-    public List<Fete> findByDate(@PathVariable (value = "date") String date) {
-
-        return feteRepository.findByDate(date);
+        return feteRepository.findMulti(key);
 
     }
+
+
 
 
 
