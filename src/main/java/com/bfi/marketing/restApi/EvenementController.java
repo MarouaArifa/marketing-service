@@ -86,12 +86,7 @@ public class EvenementController {
 
     }
 
-    @GetMapping("findDate/{date}")
-    public List<Evenement> findByDate(@PathVariable (value = "date") String date) {
 
-        return eventRepository.findByDate(date);
-
-    }
 
 
 }

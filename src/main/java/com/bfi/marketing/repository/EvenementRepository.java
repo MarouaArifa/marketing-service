@@ -11,7 +11,6 @@ public interface EvenementRepository extends JpaRepository<Evenement,Long> {
     @Query("select e from Evenement e where e.titre like %:titre%  or cast( e.date as string) like %:titre%")
     List<Evenement> findByTitre(String titre);
 
-    @Query("select e from Evenement e where cast( e.date as string) like %:date% ")
-    List<Evenement> findByDate(String date);
+
 
 }
