@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -95,6 +95,13 @@ public class FeteController {
     }
 
 
+    @GetMapping("findByDate")
+    public Optional<Fete> findMult() {
+
+
+        return feteRepository.findByDate();
+
+    }
 
 
 
